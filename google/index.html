@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMCC - Recupere Seu Dinheiro e Seu Cliente | Análise Gratuita</title>
+    <meta name="description" content="Recuperamos seu dinheiro e seu cliente sem custo antecipado. Você só paga no resultado. Solicite uma análise gratuita da sua carteira de inadimplentes.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #8B0F0F;
+            --primary-dark: #7C0C0C;
+            --secondary-color: #FFFFFF;
+            --tertiary-color: #C4C4C4;
+            --dark-modern: #05090D;
+            --light-bg: #F9F3F3;
+            --subtle-bg: #F7EDEE;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-modern);
+            overflow-x: hidden;
+        }
+
+        /* BOTÃO FLUTUANTE */
+        .floating-btn {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            box-shadow: 0 8px 25px rgba(139, 15, 15, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        .floating-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+            color: white;
+            text-decoration: none;
+        }
+
+        .floating-tooltip {
+            position: absolute;
+            right: 75px;
+            bottom: 0;
+            background: var(--dark-modern);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .floating-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            bottom: 15px;
+            border: 8px solid transparent;
+            border-left-color: var(--dark-modern);
+        }
+
+        .floating-tooltip.show {
+            opacity: 1;
+            visibility: visible;
+            animation: tooltipSlide 0.5s ease;
+        }
+
+        @keyframes tooltipSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 8px 25px rgba(139, 15, 15, 0.3); }
+            50% { box-shadow: 0 8px 35px rgba(139, 15, 15, 0.5); }
+            100% { box-shadow: 0 8px 25px rgba(139, 15, 15, 0.3); }
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(rgba(5, 9, 13, 0.7), rgba(139, 15, 15, 0.3)), url('../primeiro bloco/background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(5, 9, 13, 0.8) 0%, rgba(139, 15, 15, 0.6) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            max-height: 90vh;
+            max-width: 500px;
+            object-fit: contain;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .cta-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(139, 15, 15, 0.4);
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(139, 15, 15, 0.6);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* SEÇÕES GERAIS */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark-modern);
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            text-align: center;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* PROBLEMA SECTION */
+        .problema-section {
+            background: var(--light-bg);
+            position: relative;
+        }
+
+        .problema-item {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .problema-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .problema-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* SOLUÇÃO SECTION */
+        .solucao-section {
+            background: var(--dark-modern);
+            color: white;
+        }
+
+        .solucao-item {
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .solucao-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+
+        /* PARCEIROS SECTION */
+        .parceiros-section {
+            background: var(--subtle-bg);
+        }
+
+        .parceiro-logo {
+            max-width: 150px;
+            max-height: 100px;
+            object-fit: contain;
+            filter: grayscale(50%);
+            transition: all 0.3s ease;
+            opacity: 0.8;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .parceiro-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        /* VÍDEOS SECTION */
+        .videos-section {
+            background: var(--dark-modern);
+            color: white;
+        }
+
+        .videos-section .section-title {
+            color: white;
+        }
+
+        .videos-section .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .video-carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+        }
+
+        .video-slide {
+            display: none;
+            align-items: center;
+            gap: 40px;
+            min-height: 500px;
+        }
+
+        .video-slide.active {
+            display: flex;
+        }
+
+        .video-container {
+            position: relative;
+            flex: 0 0 300px;
+            height: 534px; /* 1080x1920 aspect ratio scaled */
+            border-radius: 15px;
+            overflow: hidden;
+            background: var(--tertiary-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .video-player.playing {
+            z-index: 2;
+        }
+
+        .video-player::-webkit-media-controls {
+            display: none !important;
+        }
+
+        .video-player::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .video-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .play-btn {
+            width: 80px;
+            height: 80px;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(139, 15, 15, 0.4);
+        }
+
+        .play-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 20px 15px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .video-container:hover .video-controls {
+            opacity: 1;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .progress-container {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            margin: 0 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .video-time {
+            font-size: 0.9rem;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .video-info {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .video-info h4 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .video-info p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .carousel-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            background: transparent;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 15px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary-color);
+            transform: scale(1.3);
+        }
+
+        .dot:hover {
+            background: rgba(255,255,255,0.6);
+        }
+
+        /* RESPONSIVO VÍDEOS */
+        @media (max-width: 768px) {
+            .video-slide {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+                min-height: auto;
+            }
+
+            .video-container {
+                flex: none;
+                width: 280px;
+                height: 498px; /* Proporção mantida para mobile */
+                margin: 0 auto;
+            }
+
+            .video-info {
+                padding-left: 0;
+            }
+
+            .video-info h4 {
+                font-size: 1.5rem;
+            }
+
+            .video-info p {
+                font-size: 1rem;
+            }
+
+            .carousel-navigation {
+                gap: 20px;
+                margin-top: 30px;
+            }
+
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .video-carousel {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-container {
+                width: 240px;
+                height: 427px;
+            }
+        }
+
+        /* BENEFÍCIOS SECTION */
+        .beneficio-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .beneficio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .beneficio-numero {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* FORMULÁRIO SECTION */
+        .formulario-section {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .form-container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            color: var(--dark-modern);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(139, 15, 15, 0.1);
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(139, 15, 15, 0.4);
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding-top: 100px;
+            }
+            
+            .hero-content {
+                margin-top: 80px;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .floating-btn {
+                right: 20px;
+                bottom: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .floating-tooltip {
+                right: 65px;
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 992px) and (min-width: 769px) {
+            .hero-image {
+                max-width: 400px;
+                max-height: 70vh;
+                right: 3%;
+            }
+        }
+
+        /* ANIMAÇÕES */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- BOTÃO FLUTUANTE -->
+    <a href="#formulario" class="floating-btn" id="floatingBtn">
+        <i class="fas fa-phone"></i>
+        <div class="floating-tooltip" id="floatingTooltip">
+            Fale com especialista agora
+        </div>
+    </a>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        
+        <!-- Imagem da Juíza -->
+        <img src="../primeiro bloco/imagem juiza.png" alt="Juíza AMCC" class="hero-image d-none d-md-block">
+        
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 col-md-8">
+                    <div class="hero-content">
+                        <h1 class="hero-title fade-in">
+                            Seu fluxo de caixa travou? 💸
+                        </h1>
+                        <p class="hero-subtitle fade-in">
+                            A inadimplência pode estar drenando o lucro da sua empresa. 
+                            Na AMCC, unimos tecnologia, jurídico e atendimento humanizado para 
+                            <strong>recuperar seu dinheiro e seu cliente</strong>, sem custo antecipado.
+                        </p>
+                        <a href="#formulario" class="cta-button fade-in">
+                            🎯 Quero recuperar meu dinheiro agora
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Imagem da Juíza para Mobile -->
+                <div class="col-12 d-md-none text-center mt-4">
+                    <img src="../primeiro bloco/imagem juiza.png" alt="Juíza AMCC" class="hero-image-mobile fade-in" style="max-height: 300px; max-width: 250px; opacity: 0.9;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEMA SECTION -->
+    <section class="section problema-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title fade-in">O que trava o seu crescimento?</h2>
+                    <p class="section-subtitle fade-in">
+                        Você sabia que a inadimplência pode estar drenando o crescimento da sua empresa silenciosamente?
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="problema-item fade-in">
+                        <div class="problema-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h4>Fluxo de caixa travado</h4>
+                        <p>Dinheiro parado na carteira de inadimplentes enquanto você precisa de capital de giro.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="problema-item fade-in">
+                        <div class="problema-icon">
+                            <i class="fas fa-users-slash"></i>
+                        </div>
+                        <h4>Equipe sobrecarregada</h4>
+                        <p>Seus colaboradores perdem tempo com cobrança em vez de focar no core business.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="problema-item fade-in">
+                        <div class="problema-icon">
+                            <i class="fas fa-user-xmark"></i>
+                        </div>
+                        <h4>Clientes perdidos</h4>
+                        <p>Clientes sumindo sem retorno, prejudicando relacionamento e vendas futuras.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="problema-item fade-in">
+                        <div class="problema-icon">
+                            <i class="fas fa-scissors"></i>
+                        </div>
+                        <h4>Redução de custos operacionais</h4>
+                        <p>Necessidade de cortar gastos por falta de previsibilidade no caixa.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <a href="#formulario" class="cta-button fade-in">
+                        📊 Peça sua análise gratuita
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VÍDEOS SECTION - MOVIDO PARA TERCEIRO BLOCO -->
+    <section class="section videos-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title fade-in">Conheça mais sobre a AMCC</h2>
+                    <p class="section-subtitle fade-in">
+                        Descubra nossa metodologia, tecnologia e expertise através de vídeos exclusivos. 
+                        Mais de 30 anos transformando inadimplência em oportunidade para empresas de todos os portes.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="video-carousel-container fade-in">
+                        <!-- Carrossel de Vídeos -->
+                        <div class="video-carousel" id="videoCarousel">
+                            <!-- Vídeo 1 -->
+                            <div class="video-slide active" data-video="1">
+                                <div class="video-container">
+                                    <video 
+                                        id="video1" 
+                                        class="video-player" 
+                                        preload="metadata"
+                                        muted
+                                        playsinline
+                                        webkit-playsinline
+                                        poster="../capas/capa 1.png">
+                                        <source src="../videos/video 1.mp4" type="video/mp4">
+                                        Seu navegador não suporta vídeos HTML5.
+                                    </video>
+                                    <div class="video-overlay">
+                                        <button class="play-btn" data-video="1">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+                                    <div class="video-controls">
+                                        <button class="control-btn play-pause-btn" data-video="1">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                        <div class="progress-container">
+                                            <div class="progress-bar" data-video="1"></div>
+                                        </div>
+                                        <div class="video-time">
+                                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                                        </div>
+                                        <button class="control-btn mute-btn" data-video="1">
+                                            <i class="fas fa-volume-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="video-info">
+                                    <h4>Nossa Metodologia Exclusiva</h4>
+                                    <p>Conheça o método AMCC de recuperação humanizada que une tecnologia e atendimento personalizado.</p>
+                                </div>
+                            </div>
+
+                            <!-- Vídeo 2 -->
+                            <div class="video-slide" data-video="2">
+                                <div class="video-container">
+                                    <video 
+                                        id="video2" 
+                                        class="video-player" 
+                                        preload="metadata"
+                                        muted
+                                        playsinline
+                                        webkit-playsinline
+                                        poster="../capas/capa 2.png">
+                                        <source src="../videos/video 2.mp4" type="video/mp4">
+                                        Seu navegador não suporta vídeos HTML5.
+                                    </video>
+                                    <div class="video-overlay">
+                                        <button class="play-btn" data-video="2">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+                                    <div class="video-controls">
+                                        <button class="control-btn play-pause-btn" data-video="2">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                        <div class="progress-container">
+                                            <div class="progress-bar" data-video="2"></div>
+                                        </div>
+                                        <div class="video-time">
+                                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                                        </div>
+                                        <button class="control-btn mute-btn" data-video="2">
+                                            <i class="fas fa-volume-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="video-info">
+                                    <h4>Tecnologia e Inovação</h4>
+                                    <p>Descubra nossas ferramentas avançadas: IA, discador preditivo, URA inteligente e canais digitais.</p>
+                                </div>
+                            </div>
+
+                            <!-- Vídeo 3 -->
+                            <div class="video-slide" data-video="3">
+                                <div class="video-container">
+                                    <video 
+                                        id="video3" 
+                                        class="video-player" 
+                                        preload="metadata"
+                                        muted
+                                        playsinline
+                                        webkit-playsinline
+                                        poster="../capas/capa 3.png">
+                                        <source src="../videos/video 3.mp4" type="video/mp4">
+                                        Seu navegador não suporta vídeos HTML5.
+                                    </video>
+                                    <div class="video-overlay">
+                                        <button class="play-btn" data-video="3">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+                                    <div class="video-controls">
+                                        <button class="control-btn play-pause-btn" data-video="3">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                        <div class="progress-container">
+                                            <div class="progress-bar" data-video="3"></div>
+                                        </div>
+                                        <div class="video-time">
+                                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                                        </div>
+                                        <button class="control-btn mute-btn" data-video="3">
+                                            <i class="fas fa-volume-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="video-info">
+                                    <h4>Compliance e Segurança Jurídica</h4>
+                                    <p>Saiba como garantimos total conformidade com LGPD e Código de Defesa do Consumidor.</p>
+                                </div>
+                            </div>
+
+                            <!-- Vídeo 4 -->
+                            <div class="video-slide" data-video="4">
+                                <div class="video-container">
+                                    <video 
+                                        id="video4" 
+                                        class="video-player" 
+                                        preload="metadata"
+                                        muted
+                                        playsinline
+                                        webkit-playsinline
+                                        poster="../capas/capa 4.png">
+                                        <source src="../videos/video 4.mp4" type="video/mp4">
+                                        Seu navegador não suporta vídeos HTML5.
+                                    </video>
+                                    <div class="video-overlay">
+                                        <button class="play-btn" data-video="4">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+                                    <div class="video-controls">
+                                        <button class="control-btn play-pause-btn" data-video="4">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                        <div class="progress-container">
+                                            <div class="progress-bar" data-video="4"></div>
+                                        </div>
+                                        <div class="video-time">
+                                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                                        </div>
+                                        <button class="control-btn mute-btn" data-video="4">
+                                            <i class="fas fa-volume-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="video-info">
+                                    <h4>30 Anos de Experiência</h4>
+                                    <p>Conheça nossa trajetória, valores e o que nos torna referência no mercado de recuperação de crédito.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navegação do Carrossel -->
+                        <div class="carousel-navigation">
+                            <button class="nav-btn prev-btn" id="prevBtn">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            
+                            <div class="carousel-dots">
+                                <span class="dot active" data-slide="1"></span>
+                                <span class="dot" data-slide="2"></span>
+                                <span class="dot" data-slide="3"></span>
+                                <span class="dot" data-slide="4"></span>
+                            </div>
+                            
+                            <button class="nav-btn next-btn" id="nextBtn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <a href="#formulario" class="cta-button fade-in">
+                        📞 Quero conhecer a AMCC!
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUÇÃO SECTION -->
+    <section class="section solucao-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title fade-in" style="color: white;">
+                        A Solução Completa para Sua Inadimplência
+                    </h2>
+                    <p class="section-subtitle fade-in" style="color: rgba(255,255,255,0.8);">
+                        Enquanto você se preocupa com novos negócios, nós cuidamos de recuperar o que já é seu 
+                        — de forma estratégica, humanizada e sem atrito.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="solucao-item fade-in">
+                        <div class="solucao-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Sem Custo Antecipado</h4>
+                        <p>Você só paga quando nós recuperarmos seu dinheiro. Zero risco para sua empresa.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="solucao-item fade-in">
+                        <div class="solucao-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>Tecnologia Avançada</h4>
+                        <p>IA, discador preditivo, URA inteligente e canais digitais para máxima eficiência.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="solucao-item fade-in">
+                        <div class="solucao-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h4>Departamento Jurídico</h4>
+                        <p>Equipe especializada para casos que não há acordo amigável.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="solucao-item fade-in">
+                        <div class="solucao-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Atendimento Humanizado</h4>
+                        <p>Abordagem respeitosa que preserva o relacionamento com seus clientes.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="solucao-item fade-in">
+                        <div class="solucao-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Compliance Total</h4>
+                        <p>LGPD, Código de Defesa do Consumidor e segurança jurídica garantida.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="solucao-item fade-in">
+                        <div class="solucao-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>+30 Anos de Experiência</h4>
+                        <p>Expertise consolidada no mercado de recuperação de crédito.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <a href="#formulario" class="cta-button fade-in">
+                        🚀 Descubra quanto pode recuperar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFÍCIOS SECTION -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title fade-in">Imagine sua empresa com:</h2>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="beneficio-card fade-in">
+                        <div class="beneficio-numero">💰</div>
+                        <h4>Fluxo de Caixa Saudável</h4>
+                        <p>Previsibilidade financeira com dinheiro recuperado mensalmente da sua carteira.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="beneficio-card fade-in">
+                        <div class="beneficio-numero">🎯</div>
+                        <h4>Equipe Focada</h4>
+                        <p>Seus colaboradores dedicados 100% ao core business, aumentando produtividade.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="beneficio-card fade-in">
+                        <div class="beneficio-numero">🤝</div>
+                        <h4>Clientes Reintegrados</h4>
+                        <p>Relacionamento preservado, com clientes voltando a comprar da sua empresa.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="beneficio-card fade-in">
+                        <div class="beneficio-numero">📈</div>
+                        <h4>Alto Índice de Conversão</h4>
+                        <p>Resultados comprovados com tecnologia e experiência de mercado.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="beneficio-card fade-in">
+                        <div class="beneficio-numero">🛡️</div>
+                        <h4>Segurança Jurídica Total</h4>
+                        <p>LGPD e compliance, sem riscos para sua marca e reputação.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="beneficio-card fade-in">
+                        <div class="beneficio-numero">⭐</div>
+                        <h4>Credibilidade</h4>
+                        <p>Equipe de especialistas cuidando da sua cobrança com excelência.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARCEIROS SECTION -->
+    <section class="section parceiros-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title fade-in">Empresas que Confiam na AMCC</h2>
+                    <p class="section-subtitle fade-in">
+                        Atendemos clientes dos diversos segmentos: eletromóveis, calçados, planos de saúde, 
+                        postos de combustíveis, supermercados, escolas, financeiras, distribuidoras e muito mais.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-4 col-6 mb-4 text-center">
+                    <img src="../parceiros de sucesso/1.jpg" alt="Parceiro 1" class="parceiro-logo fade-in">
+                </div>
+                <div class="col-lg-3 col-md-4 col-6 mb-4 text-center">
+                    <img src="../parceiros de sucesso/2.png" alt="Parceiro 2" class="parceiro-logo fade-in">
+                </div>
+                <div class="col-lg-3 col-md-4 col-6 mb-4 text-center">
+                    <img src="../parceiros de sucesso/3.png" alt="Parceiro 3" class="parceiro-logo fade-in">
+                </div>
+                <div class="col-lg-3 col-md-4 col-6 mb-4 text-center">
+                    <img src="../parceiros de sucesso/4.png" alt="Parceiro 4" class="parceiro-logo fade-in">
+                </div>
+                <div class="col-lg-3 col-md-4 col-6 mb-4 text-center">
+                    <img src="../parceiros de sucesso/5.png" alt="Parceiro 5" class="parceiro-logo fade-in">
+                </div>
+                <div class="col-lg-3 col-md-4 col-6 mb-4 text-center">
+                    <img src="../parceiros de sucesso/6.png" alt="Parceiro 6" class="parceiro-logo fade-in">
+                </div>
+                <div class="col-lg-3 col-md-4 col-6 mb-4 text-center">
+                    <img src="../parceiros de sucesso/7.png" alt="Parceiro 7" class="parceiro-logo fade-in">
+                </div>
+                <div class="col-lg-3 col-md-4 col-6 mb-4 text-center">
+                    <img src="../parceiros de sucesso/8.png" alt="Parceiro 8" class="parceiro-logo fade-in">
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <a href="#formulario" class="cta-button fade-in">
+                        🏆 Solicitar recuperação agora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULÁRIO SECTION -->
+    <section id="formulario" class="section formulario-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="form-container scale-in">
+                        <h2 class="text-center mb-4" style="color: var(--primary-color); font-weight: 700;">
+                            📋 Análise Gratuita da Sua Carteira
+                        </h2>
+                        <p class="text-center mb-5" style="font-size: 1.1rem; color: #666;">
+                            Descubra quanto dinheiro está parado na sua carteira de inadimplentes. 
+                            <strong>Sem custo, sem compromisso.</strong>
+                        </p>
+                        
+                        <form id="leadForm" action="#" method="POST">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nome" style="font-weight: 600; margin-bottom: 8px;">Nome Completo *</label>
+                                        <input type="text" class="form-control" id="nome" name="nome" required 
+                                               placeholder="Digite seu nome completo">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="telefone" style="font-weight: 600; margin-bottom: 8px;">Telefone (WhatsApp) *</label>
+                                        <input type="tel" class="form-control" id="telefone" name="telefone" required 
+                                               placeholder="(11) 99999-9999">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email" style="font-weight: 600; margin-bottom: 8px;">E-mail *</label>
+                                        <input type="email" class="form-control" id="email" name="email" required 
+                                               placeholder="seu@email.com">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="empresa" style="font-weight: 600; margin-bottom: 8px;">Nome da Empresa *</label>
+                                        <input type="text" class="form-control" id="empresa" name="empresa" required 
+                                               placeholder="Nome da sua empresa">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="valor_inadimplencia" style="font-weight: 600; margin-bottom: 8px;">Valor Estimado de Inadimplência *</label>
+                                        <select class="form-control" id="valor_inadimplencia" name="valor_inadimplencia" required>
+                                            <option value="">Selecione o valor</option>
+                                            <option value="ate_50k">Até R$ 50.000</option>
+                                            <option value="50k_100k">R$ 50.000 - R$ 100.000</option>
+                                            <option value="100k_500k">R$ 100.000 - R$ 500.000</option>
+                                            <option value="500k_1m">R$ 500.000 - R$ 1.000.000</option>
+                                            <option value="acima_1m">Acima de R$ 1.000.000</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="tentativa_anterior" style="font-weight: 600; margin-bottom: 8px;">Já tentou recuperar esses valores antes? *</label>
+                                        <select class="form-control" id="tentativa_anterior" name="tentativa_anterior" required>
+                                            <option value="">Selecione uma opção</option>
+                                            <option value="sim">Sim</option>
+                                            <option value="nao">Não</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="submit-btn">
+                                    🎯 Solicitar Análise Gratuita Agora
+                                </button>
+                                
+                                <p class="mt-3" style="font-size: 0.9rem; color: #666;">
+                                    <i class="fas fa-lock"></i> Seus dados estão seguros. Política de privacidade em conformidade com a LGPD.
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--dark-modern); color: white; padding: 50px 0; text-align: center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <img src="../logo amcc/logo branco.png" alt="AMCC Logo" style="max-width: 200px; margin-bottom: 30px; filter: brightness(1.1);">
+                    <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                        <strong>AMCC - Transformando Inadimplência em Oportunidade</strong>
+                    </p>
+                    <p style="color: rgba(255,255,255,0.7);">
+                        Mais de 30 anos recuperando dinheiro e relacionamentos.<br>
+                        Seu parceiro de confiança em recuperação de crédito.
+                    </p>
+                    
+                    <div style="margin-top: 30px;">
+                        <a href="tel:08009412686" style="color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600;">
+                            <i class="fas fa-phone"></i> 0800 941 2686
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Animações on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos com animação
+        document.querySelectorAll('.fade-in, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Máscara para telefone
+        document.getElementById('telefone').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                if (value.length < 14) {
+                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+                }
+                e.target.value = value;
+            }
+        });
+
+        // Submissão do formulário
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obter parâmetros UTM da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const utmSource = urlParams.get('utm_source') || 'google';
+            const utmCampaign = urlParams.get('utm_campaign') || 'google-ads';
+            const utmMedium = urlParams.get('utm_medium') || 'cpc';
+            
+            // Coletar dados do formulário
+            const formData = {
+                name: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('telefone').value,
+                empresa: document.getElementById('empresa').value,
+                plataforma: `Google Ads - ${utmCampaign}`,
+                question: `Valor Inadimplência: ${document.getElementById('valor_inadimplencia').options[document.getElementById('valor_inadimplencia').selectedIndex].text} | Tentativa Anterior: ${document.getElementById('tentativa_anterior').value}`,
+                source: `AMCC - Google Ads - ${utmCampaign} | ${window.location.href}`,
+                tags: ['AMCC', 'Recuperação de Crédito', 'Google Ads', utmCampaign]
+            };
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            submitBtn.disabled = true;
+            
+            // Enviar para o webhook
+            fetch('https://hook.us2.make.com/08wombkl1yfcab6s4jwuot97v0bfe99r', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Sucesso - redirecionar para página de obrigado
+                    window.location.href = '../obrigado.html';
+                } else {
+                    throw new Error('Erro no envio');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                // Em caso de erro, ainda assim mostrar sucesso para o usuário
+                alert('Dados enviados com sucesso! Entraremos em contato em breve.');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+
+        // Efeito parallax no hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-section');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // CARROSSEL DE VÍDEOS
+        class VideoCarousel {
+            constructor() {
+                this.currentSlide = 1;
+                this.totalSlides = 4;
+                this.videos = {};
+                
+                // Aguardar um pouco para garantir que o DOM está pronto
+                setTimeout(() => {
+                    this.slides = document.querySelectorAll('.video-slide');
+                    this.dots = document.querySelectorAll('.dot');
+                    this.prevBtn = document.getElementById('prevBtn');
+                    this.nextBtn = document.getElementById('nextBtn');
+                    
+                    this.initVideos();
+                    this.initControls();
+                    this.initNavigation();
+                }, 100);
+            }
+
+            initVideos() {
+                console.log('Initializing videos...');
+                for (let i = 1; i <= this.totalSlides; i++) {
+                    const video = document.getElementById(`video${i}`);
+                    const videoSlide = document.querySelector(`[data-video="${i}"]`);
+                    
+                    console.log(`Video ${i}:`, video ? 'found' : 'not found');
+                    console.log(`Slide ${i}:`, videoSlide ? 'found' : 'not found');
+                    
+                    if (video && videoSlide) {
+                        this.videos[i] = {
+                            element: video,
+                            isPlaying: false,
+                            container: videoSlide.querySelector('.video-container'),
+                            overlay: videoSlide.querySelector('.video-overlay'),
+                            playBtn: videoSlide.querySelector('.play-btn'),
+                            playPauseBtn: videoSlide.querySelector('.play-pause-btn'),
+                            progressBar: videoSlide.querySelector('.progress-bar'),
+                            progressContainer: videoSlide.querySelector('.progress-container'),
+                            muteBtn: videoSlide.querySelector('.mute-btn'),
+                            currentTimeSpan: videoSlide.querySelector('.current-time'),
+                            totalTimeSpan: videoSlide.querySelector('.total-time')
+                        };
+
+                        this.setupVideoEvents(i);
+                    }
+                }
+                console.log('Videos initialized:', Object.keys(this.videos).length);
+            }
+
+            setupVideoEvents(videoNum) {
+                const videoObj = this.videos[videoNum];
+                const video = videoObj.element;
+
+                // Play button no overlay
+                if (videoObj.playBtn) {
+                    videoObj.playBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log(`Play button clicked for video ${videoNum}`);
+                        this.startPlay(videoNum);
+                    });
+                }
+
+                // Play/Pause button nos controles
+                if (videoObj.playPauseBtn) {
+                    videoObj.playPauseBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.togglePlay(videoNum);
+                    });
+                }
+
+                // Mute button
+                if (videoObj.muteBtn) {
+                    videoObj.muteBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.toggleMute(videoNum);
+                    });
+                }
+
+                // Progress bar
+                if (videoObj.progressContainer) {
+                    videoObj.progressContainer.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const rect = videoObj.progressContainer.getBoundingClientRect();
+                        const percent = (e.clientX - rect.left) / rect.width;
+                        if (video.duration) {
+                            video.currentTime = percent * video.duration;
+                        }
+                    });
+                }
+
+                // Container click para play/pause (incluindo área do poster)
+                if (videoObj.container) {
+                    videoObj.container.addEventListener('click', (e) => {
+                        // Se clicou nos controles, não fazer nada
+                        if (e.target.closest('.video-controls')) {
+                            return;
+                        }
+                        
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        if (videoObj.isPlaying) {
+                            this.pauseVideo(videoNum);
+                        } else {
+                            this.startPlay(videoNum);
+                        }
+                    });
+                }
+
+                // Click direto no vídeo também
+                video.addEventListener('click', (e) => {
+                    // Se clicou nos controles, não fazer nada
+                    if (e.target.closest('.video-controls')) {
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    if (videoObj.isPlaying) {
+                        this.pauseVideo(videoNum);
+                    } else {
+                        this.startPlay(videoNum);
+                    }
+                });
+
+                // Video events
+                video.addEventListener('loadedmetadata', () => {
+                    if (videoObj.totalTimeSpan) {
+                        videoObj.totalTimeSpan.textContent = this.formatTime(video.duration);
+                    }
+                });
+
+                video.addEventListener('timeupdate', () => {
+                    if (videoObj.progressBar && video.duration) {
+                        const percent = (video.currentTime / video.duration) * 100;
+                        videoObj.progressBar.style.width = percent + '%';
+                    }
+                    
+                    if (videoObj.currentTimeSpan) {
+                        videoObj.currentTimeSpan.textContent = this.formatTime(video.currentTime);
+                    }
+                });
+
+                video.addEventListener('play', () => {
+                    videoObj.isPlaying = true;
+                    if (videoObj.overlay) {
+                        videoObj.overlay.classList.add('hidden');
+                    }
+                    if (videoObj.playPauseBtn) {
+                        videoObj.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    }
+                });
+
+                video.addEventListener('pause', () => {
+                    videoObj.isPlaying = false;
+                    if (videoObj.playPauseBtn) {
+                        videoObj.playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    }
+                });
+
+                video.addEventListener('ended', () => {
+                    this.resetVideo(videoNum);
+                    this.autoNext();
+                });
+
+                // Preparar vídeo
+                video.preload = 'metadata';
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
+                
+                // Garantir que inicia com som
+                video.muted = false;
+                video.volume = 0.8; // Volume inicial em 80%
+                
+                // Configurar ícone inicial do mute
+                if (videoObj.muteBtn) {
+                    videoObj.muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                }
+            }
+
+            startPlay(videoNum) {
+                console.log(`Starting play for video ${videoNum}`);
+                // Pausar todos os outros vídeos primeiro
+                this.pauseAllVideos();
+                this.playVideo(videoNum);
+            }
+
+            togglePlay(videoNum) {
+                if (this.videos[videoNum].isPlaying) {
+                    this.pauseVideo(videoNum);
+                } else {
+                    this.startPlay(videoNum);
+                }
+            }
+
+            playVideo(videoNum) {
+                const videoObj = this.videos[videoNum];
+                const video = videoObj.element;
+                
+                console.log(`Attempting to play video ${videoNum}`);
+                
+                // Garantir que o vídeo não está mutado
+                video.muted = false;
+                
+                // Garantir que o vídeo está carregado
+                video.load();
+                
+                // Tentar reproduzir
+                const playPromise = video.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log(`Video ${videoNum} started playing successfully`);
+                        // Adicionar classe para indicar que está tocando
+                        video.classList.add('playing');
+                        
+                        // Atualizar ícone do botão de mute
+                        if (videoObj.muteBtn) {
+                            videoObj.muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                        }
+                    }).catch((error) => {
+                        console.log(`Trying muted playback for video ${videoNum}`, error);
+                        // Apenas em caso de erro, tentar com áudio mutado
+                        video.muted = true;
+                        const retryPromise = video.play();
+                        if (retryPromise !== undefined) {
+                            retryPromise.then(() => {
+                                console.log(`Video ${videoNum} playing muted due to autoplay policy`);
+                                video.classList.add('playing');
+                                
+                                // Atualizar ícone do botão de mute
+                                if (videoObj.muteBtn) {
+                                    videoObj.muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                                }
+                                
+                                // Mostrar dica para usuário ativar som
+                                this.showUnmuteHint(videoNum);
+                            }).catch((retryError) => {
+                                console.error(`Failed to play video ${videoNum}:`, retryError);
+                            });
+                        }
+                    });
+                }
+            }
+
+            pauseVideo(videoNum) {
+                const videoObj = this.videos[videoNum];
+                const video = videoObj.element;
+                
+                video.pause();
+                video.classList.remove('playing');
+                
+                // O estado será atualizado pelo event listener 'pause'
+            }
+
+            resetVideo(videoNum) {
+                const videoObj = this.videos[videoNum];
+                const video = videoObj.element;
+                
+                video.pause();
+                video.currentTime = 0;
+                video.classList.remove('playing');
+                videoObj.isPlaying = false;
+                
+                if (videoObj.overlay) {
+                    videoObj.overlay.classList.remove('hidden');
+                }
+                
+                if (videoObj.playPauseBtn) {
+                    videoObj.playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            }
+
+            pauseAllVideos() {
+                for (let i = 1; i <= this.totalSlides; i++) {
+                    if (this.videos[i] && this.videos[i].isPlaying) {
+                        this.pauseVideo(i);
+                    }
+                }
+            }
+
+            toggleMute(videoNum) {
+                const videoObj = this.videos[videoNum];
+                const video = videoObj.element;
+                
+                video.muted = !video.muted;
+                
+                if (videoObj.muteBtn) {
+                    const icon = video.muted ? 'fa-volume-mute' : 'fa-volume-up';
+                    videoObj.muteBtn.innerHTML = `<i class="fas ${icon}"></i>`;
+                }
+                
+                console.log(`Video ${videoNum} ${video.muted ? 'muted' : 'unmuted'}`);
+            }
+
+            showUnmuteHint(videoNum) {
+                const videoObj = this.videos[videoNum];
+                
+                // Criar elemento de dica se não existir
+                let hint = videoObj.container.querySelector('.unmute-hint');
+                if (!hint) {
+                    hint = document.createElement('div');
+                    hint.className = 'unmute-hint';
+                    hint.innerHTML = '<i class="fas fa-volume-up"></i> Clique para ativar som';
+                    hint.style.cssText = `
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        background: rgba(0,0,0,0.8);
+                        color: white;
+                        padding: 8px 12px;
+                        border-radius: 6px;
+                        font-size: 12px;
+                        z-index: 10;
+                        cursor: pointer;
+                        transition: opacity 0.3s ease;
+                    `;
+                    
+                    // Clique na dica ativa o som
+                    hint.addEventListener('click', () => {
+                        if (videoObj.element.muted) {
+                            this.toggleMute(videoNum);
+                        }
+                        hint.style.opacity = '0';
+                        setTimeout(() => hint.remove(), 300);
+                    });
+                    
+                    videoObj.container.appendChild(hint);
+                }
+                
+                // Mostrar dica
+                hint.style.opacity = '1';
+                
+                // Remover automaticamente após 5 segundos
+                setTimeout(() => {
+                    if (hint && hint.parentNode) {
+                        hint.style.opacity = '0';
+                        setTimeout(() => {
+                            if (hint && hint.parentNode) {
+                                hint.remove();
+                            }
+                        }, 300);
+                    }
+                }, 5000);
+            }
+
+            formatTime(seconds) {
+                if (isNaN(seconds)) return '0:00';
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            initNavigation() {
+                // Previous button
+                this.prevBtn.addEventListener('click', () => {
+                    this.pauseAllVideos();
+                    this.goToSlide(this.currentSlide - 1);
+                });
+
+                // Next button
+                this.nextBtn.addEventListener('click', () => {
+                    this.pauseAllVideos();
+                    this.goToSlide(this.currentSlide + 1);
+                });
+
+                // Dots
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        this.pauseAllVideos();
+                        this.goToSlide(index + 1);
+                    });
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (this.isCarouselInView()) {
+                        if (e.key === 'ArrowLeft') {
+                            this.pauseAllVideos();
+                            this.goToSlide(this.currentSlide - 1);
+                        } else if (e.key === 'ArrowRight') {
+                            this.pauseAllVideos();
+                            this.goToSlide(this.currentSlide + 1);
+                        } else if (e.key === ' ') {
+                            e.preventDefault();
+                            this.togglePlay(this.currentSlide);
+                        }
+                    }
+                });
+
+                // Touch/swipe support
+                let startX = 0;
+                let endX = 0;
+
+                const carousel = document.querySelector('.video-carousel');
+                carousel.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+
+                carousel.addEventListener('touchend', (e) => {
+                    endX = e.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+
+                    if (Math.abs(diffX) > 50) { // Minimum swipe distance
+                        if (diffX > 0) {
+                            // Swipe left - next slide
+                            this.pauseAllVideos();
+                            this.goToSlide(this.currentSlide + 1);
+                        } else {
+                            // Swipe right - previous slide
+                            this.pauseAllVideos();
+                            this.goToSlide(this.currentSlide - 1);
+                        }
+                    }
+                });
+            }
+
+            initControls() {
+                this.updateNavigation();
+                
+                // Auto-advance every 10 seconds if no video is playing
+                setInterval(() => {
+                    const anyPlaying = Object.values(this.videos).some(v => v.isPlaying);
+                    if (!anyPlaying && this.isCarouselInView()) {
+                        this.autoNext();
+                    }
+                }, 10000);
+            }
+
+            goToSlide(slideNum) {
+                if (slideNum < 1) slideNum = this.totalSlides;
+                if (slideNum > this.totalSlides) slideNum = 1;
+
+                // Hide current slide
+                this.slides[this.currentSlide - 1].classList.remove('active');
+                this.dots[this.currentSlide - 1].classList.remove('active');
+
+                // Show new slide
+                this.currentSlide = slideNum;
+                this.slides[this.currentSlide - 1].classList.add('active');
+                this.dots[this.currentSlide - 1].classList.add('active');
+
+                this.updateNavigation();
+            }
+
+            autoNext() {
+                this.goToSlide(this.currentSlide + 1);
+            }
+
+            updateNavigation() {
+                // Update button states
+                this.prevBtn.disabled = false;
+                this.nextBtn.disabled = false;
+                
+                // Optional: disable buttons at ends
+                // this.prevBtn.disabled = this.currentSlide === 1;
+                // this.nextBtn.disabled = this.currentSlide === this.totalSlides;
+            }
+
+            isCarouselInView() {
+                const carousel = document.querySelector('.video-carousel-container');
+                if (!carousel) return false;
+
+                const rect = carousel.getBoundingClientRect();
+                return rect.top < window.innerHeight && rect.bottom > 0;
+            }
+        }
+
+        // Initialize video carousel when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Aguardar um pouco para garantir que todos os elementos estejam prontos
+            setTimeout(() => {
+                new VideoCarousel();
+            }, 500);
+            
+            // Widget flutuante tooltip
+            setTimeout(() => {
+                const tooltip = document.getElementById('floatingTooltip');
+                if (tooltip) {
+                    tooltip.classList.add('show');
+                    
+                    // Remover tooltip após 5 segundos
+                    setTimeout(() => {
+                        tooltip.classList.remove('show');
+                    }, 5000);
+                }
+            }, 10000); // Mostrar após 10 segundos
+        });
+    </script>
+</body>
+</html>
